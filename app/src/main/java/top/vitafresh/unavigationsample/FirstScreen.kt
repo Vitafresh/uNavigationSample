@@ -20,8 +20,9 @@ import androidx.compose.ui.unit.sp
 import top.vitafresh.unavigationsample.ui.theme.UNavigationSampleTheme
 
 @Composable
-fun FirstScreen(navigateScreen: () -> Unit) {
+fun FirstScreen(navigateScreen: (String, Int) -> Unit) {
     val name = remember { mutableStateOf("") }
+    val age = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -34,12 +35,20 @@ fun FirstScreen(navigateScreen: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = name.value,
-            onValueChange = { name.value = it }
+            onValueChange = { name.value = it },
+            label = { Text("Name") }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = age.value,
+            onValueChange = { age.value = it },
+            label = { Text("Age") }
         )
 
+        Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             // Handle button click
-            navigateScreen()
+            navigateScreen(name.value, age.value.toIntOrNull() ?: 99)
         }) {
             Text(text = "Goto Second Screen")
         }
@@ -50,6 +59,6 @@ fun FirstScreen(navigateScreen: () -> Unit) {
 @Preview(showBackground = true)
 fun FirstScreenPreview() {
     UNavigationSampleTheme {
-        FirstScreen({})
+        //FirstScreen({})
     }
 }

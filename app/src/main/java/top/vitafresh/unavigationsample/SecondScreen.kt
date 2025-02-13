@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import top.vitafresh.unavigationsample.ui.theme.UNavigationSampleTheme
 
 @Composable
-fun SecondScreen(navigateScreen: () -> Unit) {
+fun SecondScreen(name: String, age: Int, navigateScreen: (String, Int) -> Unit) {
 //    val name = remember { mutableStateOf("") }
 
     Column(
@@ -29,13 +29,13 @@ fun SecondScreen(navigateScreen: () -> Unit) {
     ) {
         Text(text = "Second Screen", fontSize = 24.sp)
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Welcome to Second Screen", fontSize = 24.sp)
+        Text("Welcome, $name. Age: $age", fontSize = 24.sp)
 
         Button(onClick = {
             // Handle button click
-            navigateScreen()
+            navigateScreen(name, age)
         }) {
-            Text(text = "Goto Third Screen")
+            Text(text = "Goto first Screen")
         }
         Spacer(modifier = Modifier.height(16.dp))
     }
@@ -45,7 +45,7 @@ fun SecondScreen(navigateScreen: () -> Unit) {
 @Preview(showBackground = true)
 fun SecondScreenPreview() {
     UNavigationSampleTheme {
-        SecondScreen({})
+//        SecondScreen("Hello","", {})
     }
 }
 
